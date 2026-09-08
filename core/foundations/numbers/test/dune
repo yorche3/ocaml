@@ -1,0 +1,11 @@
+(test
+ (name recursive_tests)
+ (libraries numbers alcotest))
+
+(test
+ (name recursive_with_acc_tests)
+ (libraries numbers alcotest))
+
+(test
+ (name iterative_tests)
+ (libraries numbers alcotest))
