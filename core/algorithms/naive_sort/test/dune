@@ -1,0 +1,3 @@
+(test
+ (name naive_sort_tests)
+ (libraries naive_sort alcotest))
