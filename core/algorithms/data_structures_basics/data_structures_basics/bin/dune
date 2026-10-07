@@ -1,0 +1,4 @@
+(executable
+ (public_name data_structures_basics)
+ (name main)
+ (libraries data_structures_basics))
