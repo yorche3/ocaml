@@ -1,0 +1,4 @@
+(executable
+ (public_name naive_sort)
+ (name main)
+ (libraries naive_sort))
