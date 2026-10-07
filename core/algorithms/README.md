@@ -11,6 +11,7 @@ Los módulos de esta fase trabajan sobre `int array`, que en OCaml **es mutable*
 | Módulo | Especificación | Enfoque | Tests | Estado |
 |--------|---------------|---------|:-----:|:------:|
 | [`naive_sort/`](naive_sort/) | [05_Naive_Sort](https://yorche3.github.io/programming_languages/core/algorithms/05_Naive_Sort/) | `dune runtest` + Alcotest | 3 | ✅ |
+| [`data_structures_basics/`](data_structures_basics/) | [06_Data_Structures_Basics](https://yorche3.github.io/programming_languages/core/algorithms/06_Data_Structures_Basics/) | `dune runtest` + Alcotest | 4 | ✅ |
 
 ---
 
@@ -18,14 +19,27 @@ Los módulos de esta fase trabajan sobre `int array`, que en OCaml **es mutable*
 
 ```text
 algorithms/
-└── naive_sort/                        # 05_Naive_Sort
-    ├── dune-project                   # (lang dune 3.0) + (name naive_sort)
-    ├── src/
-    │   ├── dune                       # Librería naive_sort
-    │   └── naive_sort.ml              # selection_sort, bubble_sort, insertion_sort
+├── naive_sort/                        # 05_Naive_Sort
+│   ├── dune-project                   # (lang dune 3.0) + (name naive_sort)
+│   ├── src/
+│   │   ├── dune                       # Librería naive_sort
+│   │   └── naive_sort.ml              # selection_sort, bubble_sort, insertion_sort
+│   ├── test/
+│   │   ├── dune                       # Test ejecutable con alcotest
+│   │   └── naive_sort_tests.ml        # 3 tests × 7 casos
+│   └── README.md
+└── data_structures_basics/            # 06_Data_Structures_Basics
+    ├── dune-project                   # (lang dune 3.24) + (name data_structures_basics)
+    ├── lib/
+    │   ├── dune                       # Librería data_structures_basics
+    │   ├── data_structures_basics.ml  # Node, LinkedList, Stack, Queue
+    │   └── data_structures_basics.mli # Interfaz del módulo
+    ├── bin/
+    │   ├── dune                       # Ejecutable
+    │   └── main.ml                    # Punto de entrada
     ├── test/
     │   ├── dune                       # Test ejecutable con alcotest
-    │   └── naive_sort_tests.ml        # 3 tests × 7 casos
+    │   └── test_data_structures_basics.ml  # 4 tests
     └── README.md
 ```
 
@@ -59,6 +73,10 @@ algorithms/
 ```bash
 # Naive Sort Tests
 cd naive_sort
+dune runtest
+
+# Data Structures Basics Tests
+cd data_structures_basics
 dune runtest
 ```
 
