@@ -1,3 +1,0 @@
-(test
- (name test_data_structures_basics)
- (libraries data_structures_basics))
