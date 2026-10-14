@@ -8,7 +8,7 @@ Implementación de la especificación [01_Hello_World](https://yorche3.github.io
 
 | Archivo | Propósito |
 |---------|-----------|
-| [`helloworld.ml`](helloworld.ml) | Código fuente: imprime `"Hello, World! from Ocaml!"` en la salida estándar. |
+| [`hello_world.ml`](hello_world.ml) | Código fuente: imprime `"Hello, World! from Ocaml!"` en la salida estándar. |
 | `helloworld` | Ejecutable bytecode generado por `ocamlc` (no versionado). |
 | `helloworld.native` | Ejecutable nativo generado por `ocamlopt` (no versionado). |
 | `*.cmo`, `*.cmi`, `*.cmx` | Artefactos de compilación (ignorados en `.gitignore`). |
@@ -17,7 +17,7 @@ Implementación de la especificación [01_Hello_World](https://yorche3.github.io
 
 ```text
 helloworld/
-├── helloworld.ml         # Código fuente
+├── hello_world.ml         # Código fuente
 ├── helloworld            # Bytecode ejecutable (generado por ocamlc)
 ├── helloworld.native     # Ejecutable nativo (generado por ocamlopt)
 └── README.md             # Este archivo
@@ -39,7 +39,7 @@ helloworld/
    mkdir -p ocaml/core/foundations/helloworld
    ```
 
-2. Escribir el archivo `helloworld.ml` con el código fuente.
+2. Escribir el archivo `hello_world.ml` con el código fuente.
 
 3. No se necesita ningún paso adicional de construcción o vinculación de dependencias.
 
@@ -77,14 +77,14 @@ ocamlc --version
 
 ```bash
 cd ocaml/core/foundations/helloworld
-ocaml helloworld.ml
+ocaml hello_world.ml
 ```
 
 ### Compilar a bytecode y ejecutar / Compile to bytecode & run
 
 ```bash
 cd ocaml/core/foundations/helloworld
-ocamlc helloworld.ml -o helloworld
+ocamlc hello_world.ml -o helloworld
 ./helloworld
 ```
 
@@ -92,7 +92,7 @@ ocamlc helloworld.ml -o helloworld
 
 ```bash
 cd ocaml/core/foundations/helloworld
-ocamlopt helloworld.ml -o helloworld.native
+ocamlopt hello_world.ml -o helloworld.native
 ./helloworld.native
 ```
 
