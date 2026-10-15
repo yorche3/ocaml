@@ -10,7 +10,7 @@ Lee un nombre desde la entrada estándar y saluda al usuario.
 
 | Archivo | Propósito |
 |---------|-----------|
-| [`hellouser.ml`](hellouser.ml) | Código fuente: solicita un nombre al usuario y saluda. |
+| [`hello_user.ml`](hello_user.ml) | Código fuente: solicita un nombre al usuario y saluda. |
 | `hellouser` | Ejecutable bytecode generado por `ocamlc` (no versionado). |
 | `hellouser.native` | Ejecutable nativo generado por `ocamlopt` (no versionado). |
 | `*.cmo`, `*.cmi`, `*.cmx` | Artefactos de compilación (ignorados en `.gitignore`). |
@@ -19,7 +19,7 @@ Lee un nombre desde la entrada estándar y saluda al usuario.
 
 ```text
 hellouser/
-├── hellouser.ml          # Código fuente
+├── hello_user.ml          # Código fuente
 ├── hellouser             # Bytecode ejecutable (generado por ocamlc)
 ├── hellouser.native      # Ejecutable nativo (generado por ocamlopt)
 └── README.md             # Este archivo
@@ -49,7 +49,7 @@ hellouser/
    mkdir -p ocaml/core/foundations/hellouser
    ```
 
-2. Escribir el archivo `hellouser.ml` con el código fuente.
+2. Escribir el archivo `hello_user.ml` con el código fuente.
 
 3. No se necesita ningún paso adicional de construcción o vinculación de dependencias.
 
@@ -103,14 +103,14 @@ ocamlc --version
 
 ```bash
 cd ocaml/core/foundations/hellouser
-ocaml hellouser.ml
+ocaml hello_user.ml
 ```
 
 ### Compilar a bytecode y ejecutar / Compile to bytecode & run
 
 ```bash
 cd ocaml/core/foundations/hellouser
-ocamlc hellouser.ml -o hellouser
+ocamlc hello_user.ml -o hellouser
 ./hellouser
 ```
 
@@ -118,7 +118,7 @@ ocamlc hellouser.ml -o hellouser
 
 ```bash
 cd ocaml/core/foundations/hellouser
-ocamlopt hellouser.ml -o hellouser.native
+ocamlopt hello_user.ml -o hellouser.native
 ./hellouser.native
 ```
 
