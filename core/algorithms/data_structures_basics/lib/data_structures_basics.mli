@@ -1,6 +1,6 @@
 (** Basic linked data structures built from scratch over Node.
-    Absent links and fallible operations use [option], never sentinels.
-    Every constructor is named [create]; fallible reads return [option]. *)
+    Only absent links use [option]; fallible reads return the [-1] sentinel.
+    Every constructor is named [create]. *)
 
 module Node : sig
   type t
@@ -24,8 +24,8 @@ module LinkedList : sig
   (** Creates an empty list. A fresh instance each call. *)
   val create : unit -> t
 
-  (** Head value, or [None] when empty. *)
-  val head : t -> int option
+  (** Head value, or [-1] when empty. *)
+  val head : t -> int
 
   (** Inserts [value] at the head. O(1). *)
   val insert_head : t -> int -> unit
@@ -52,11 +52,11 @@ module Stack : sig
   (** Pushes [value] on top. O(1). *)
   val push : t -> int -> unit
 
-  (** Pops the top value, or [None] when empty. O(1). *)
-  val pop : t -> int option
+  (** Pops the top value, or [-1] when empty. O(1). *)
+  val pop : t -> int
 
-  (** Observes the top value without removing it, or [None]. *)
-  val peek : t -> int option
+  (** Observes the top value without removing it, or [-1]. *)
+  val peek : t -> int
 
   val is_empty : t -> bool
   val length : t -> int
@@ -70,11 +70,11 @@ module Queue : sig
   (** Appends [value] at the rear. O(1). *)
   val enqueue : t -> int -> unit
 
-  (** Removes the front value, or [None] when empty. O(1). *)
-  val dequeue : t -> int option
+  (** Removes the front value, or [-1] when empty. O(1). *)
+  val dequeue : t -> int
 
-  (** Observes the front value without removing it, or [None]. *)
-  val peek : t -> int option
+  (** Observes the front value without removing it, or [-1]. *)
+  val peek : t -> int
 
   val is_empty : t -> bool
   val length : t -> int

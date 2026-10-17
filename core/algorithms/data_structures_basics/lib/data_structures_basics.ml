@@ -29,8 +29,8 @@ module LinkedList = struct
 
   let head list =
     match list.head with
-    | Some node -> Some node.value
-    | None -> None
+    | Some node -> node.value
+    | None -> -1
 
   let insert_head list value =
     let new_node = Node.create value in
@@ -95,13 +95,13 @@ module Stack = struct
     | Some top_node ->
         stack.top <- Node.next top_node;
         stack.count <- stack.count - 1;
-        Some top_node.value
-    | None -> None
+        top_node.value
+    | None -> -1
 
   let peek stack =
     match stack.top with
-    | Some top_node -> Some top_node.value
-    | None -> None
+    | Some top_node -> top_node.value
+    | None -> -1
 
   let is_empty stack =
     stack.count = 0
@@ -134,13 +134,13 @@ module Queue = struct
         queue.front <- Node.next front_node;
         if queue.front = None then queue.rear <- None;
         queue.count <- queue.count - 1;
-        Some front_node.value
-    | None -> None
+        front_node.value
+    | None -> -1
 
   let peek queue =
     match queue.front with
-    | Some front_node -> Some front_node.value
-    | None -> None
+    | Some front_node -> front_node.value
+    | None -> -1
 
   let is_empty queue =
     queue.count = 0

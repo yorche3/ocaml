@@ -94,9 +94,9 @@ let linked_list_cases () =
             "LinkedList should have size zero after initialization"
             list_initial_size_output
             (Data_structures_basics.LinkedList.length list);
-          Alcotest.check (Alcotest.option Alcotest.int)
+          Alcotest.check Alcotest.int
             "LinkedList should return None for an empty head"
-            None
+            (-1)
             (Data_structures_basics.LinkedList.head list));
     };
     {
@@ -111,9 +111,9 @@ let linked_list_cases () =
             "LinkedList should contain all inserted values"
             list_populated_size_output
             (Data_structures_basics.LinkedList.length list);
-          Alcotest.check (Alcotest.option Alcotest.int)
+          Alcotest.check Alcotest.int
             "LinkedList should expose the head insertion first"
-            (Some list_head_input)
+            list_head_input
             (Data_structures_basics.LinkedList.head list));
     };
     {
@@ -128,9 +128,9 @@ let linked_list_cases () =
             "LinkedList should reduce size after deletion"
             list_after_delete_size_output
             (Data_structures_basics.LinkedList.length list);
-          Alcotest.check (Alcotest.option Alcotest.int)
+          Alcotest.check Alcotest.int
             "LinkedList should preserve its head when deleting a later value"
-            (Some list_head_input)
+            list_head_input
             (Data_structures_basics.LinkedList.head list));
     };
     {
@@ -170,9 +170,9 @@ let linked_list_cases () =
             "LinkedList should have size zero after all values are deleted"
             list_empty_size_output
             (Data_structures_basics.LinkedList.length list);
-          Alcotest.check (Alcotest.option Alcotest.int)
+          Alcotest.check Alcotest.int
             "LinkedList should return None after all values are deleted"
-            None
+            (-1)
             (Data_structures_basics.LinkedList.head list));
     };
   ]
@@ -192,13 +192,13 @@ let stack_cases () =
             "Stack should have size zero after initialization"
             stack_empty_size_output
             (Data_structures_basics.Stack.length stack);
-          Alcotest.check (Alcotest.option Alcotest.int)
+          Alcotest.check Alcotest.int
             "Stack should return None when peeking while empty"
-            None
+            (-1)
             (Data_structures_basics.Stack.peek stack);
-          Alcotest.check (Alcotest.option Alcotest.int)
+          Alcotest.check Alcotest.int
             "Stack should return None when popping while empty"
-            None
+            (-1)
             (Data_structures_basics.Stack.pop stack));
     };
     {
@@ -208,9 +208,9 @@ let stack_cases () =
           Data_structures_basics.Stack.push stack stack_first_input;
           Data_structures_basics.Stack.push stack stack_second_input;
           Data_structures_basics.Stack.push stack stack_third_input;
-          Alcotest.check (Alcotest.option Alcotest.int)
+          Alcotest.check Alcotest.int
             "Stack should peek at the most recently pushed value"
-            (Some stack_third_input)
+            stack_third_input
             (Data_structures_basics.Stack.peek stack);
           Alcotest.check Alcotest.int
             "Stack should preserve size when peeking"
@@ -221,22 +221,22 @@ let stack_cases () =
       description = "removal and reuse";
       verify =
         (fun () ->
-          Alcotest.check (Alcotest.option Alcotest.int)
+          Alcotest.check Alcotest.int
             "Stack should pop in LIFO order"
-            (Some stack_third_input)
+            stack_third_input
             (Data_structures_basics.Stack.pop stack);
           Data_structures_basics.Stack.push stack stack_reused_input;
-          Alcotest.check (Alcotest.option Alcotest.int)
+          Alcotest.check Alcotest.int
             "Stack should pop the reused value first"
-            (Some stack_reused_input)
+            stack_reused_input
             (Data_structures_basics.Stack.pop stack);
-          Alcotest.check (Alcotest.option Alcotest.int)
+          Alcotest.check Alcotest.int
             "Stack should retain the next LIFO value"
-            (Some stack_second_input)
+            stack_second_input
             (Data_structures_basics.Stack.pop stack);
-          Alcotest.check (Alcotest.option Alcotest.int)
+          Alcotest.check Alcotest.int
             "Stack should retain the oldest value last"
-            (Some stack_first_input)
+            stack_first_input
             (Data_structures_basics.Stack.pop stack);
           Alcotest.check Alcotest.bool
             "Stack should be empty after all values are popped"
@@ -251,9 +251,9 @@ let stack_cases () =
       description = "empty after removal";
       verify =
         (fun () ->
-          Alcotest.check (Alcotest.option Alcotest.int)
+          Alcotest.check Alcotest.int
             "Stack should return None after all values are popped"
-            None
+            (-1)
             (Data_structures_basics.Stack.pop stack);
           Alcotest.check Alcotest.bool
             "Stack should remain empty after a failed pop"
@@ -277,13 +277,13 @@ let queue_cases () =
             "Queue should have size zero after initialization"
             queue_empty_size_output
             (Data_structures_basics.Queue.length queue);
-          Alcotest.check (Alcotest.option Alcotest.int)
+          Alcotest.check Alcotest.int
             "Queue should return None when peeking while empty"
-            None
+            (-1)
             (Data_structures_basics.Queue.peek queue);
-          Alcotest.check (Alcotest.option Alcotest.int)
+          Alcotest.check Alcotest.int
             "Queue should return None when dequeuing while empty"
-            None
+            (-1)
             (Data_structures_basics.Queue.dequeue queue));
     };
     {
@@ -293,9 +293,9 @@ let queue_cases () =
           Data_structures_basics.Queue.enqueue queue queue_first_input;
           Data_structures_basics.Queue.enqueue queue queue_second_input;
           Data_structures_basics.Queue.enqueue queue queue_third_input;
-          Alcotest.check (Alcotest.option Alcotest.int)
+          Alcotest.check Alcotest.int
             "Queue should peek at the earliest enqueued value"
-            (Some queue_first_input)
+            queue_first_input
             (Data_structures_basics.Queue.peek queue);
           Alcotest.check Alcotest.int
             "Queue should preserve size when peeking"
@@ -306,22 +306,22 @@ let queue_cases () =
       description = "removal and reuse";
       verify =
         (fun () ->
-          Alcotest.check (Alcotest.option Alcotest.int)
+          Alcotest.check Alcotest.int
             "Queue should dequeue in FIFO order"
-            (Some queue_first_input)
+            queue_first_input
             (Data_structures_basics.Queue.dequeue queue);
           Data_structures_basics.Queue.enqueue queue queue_reused_input;
-          Alcotest.check (Alcotest.option Alcotest.int)
+          Alcotest.check Alcotest.int
             "Queue should retain the second enqueued value"
-            (Some queue_second_input)
+            queue_second_input
             (Data_structures_basics.Queue.dequeue queue);
-          Alcotest.check (Alcotest.option Alcotest.int)
+          Alcotest.check Alcotest.int
             "Queue should retain the third enqueued value"
-            (Some queue_third_input)
+            queue_third_input
             (Data_structures_basics.Queue.dequeue queue);
-          Alcotest.check (Alcotest.option Alcotest.int)
+          Alcotest.check Alcotest.int
             "Queue should dequeue the reused value last"
-            (Some queue_reused_input)
+            queue_reused_input
             (Data_structures_basics.Queue.dequeue queue);
           Alcotest.check Alcotest.bool
             "Queue should be empty after all values are dequeued"
@@ -336,9 +336,9 @@ let queue_cases () =
       description = "empty after removal";
       verify =
         (fun () ->
-          Alcotest.check (Alcotest.option Alcotest.int)
+          Alcotest.check Alcotest.int
             "Queue should return None after all values are dequeued"
-            None
+            (-1)
             (Data_structures_basics.Queue.dequeue queue);
           Alcotest.check Alcotest.bool
             "Queue should remain empty after a failed dequeue"
