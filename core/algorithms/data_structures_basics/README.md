@@ -69,7 +69,7 @@ Test Successful in 0.001s. 4 tests run.
 | `Node.next` | `Node.t → Node.t option` | `O(1)` | Observa el enlace, `None` si está ausente / Observes the link, `None` if absent |
 | `Node.set_next` | `Node.t → Node.t option → unit` | `O(1)` | Reemplaza el enlace / Replaces the link |
 | `LinkedList.create` | `unit → LinkedList.t` | `O(1)` | Crea una lista vacía / Creates an empty list |
-| `LinkedList.head` | `LinkedList.t → int option` | `O(1)` | Valor de la cabeza, `None` si está vacía / Head value, `None` if empty |
+| `LinkedList.head` | `LinkedList.t → int` | `O(1)` | Valor de la cabeza, `-1` si está vacía / Head value, `-1` if empty |
 | `LinkedList.insert_head` | `LinkedList.t → int → unit` | `O(1)` | Inserta al inicio / Inserts at the head |
 | `LinkedList.insert_tail` | `LinkedList.t → int → unit` | `O(1)` | Inserta al final / Inserts at the tail |
 | `LinkedList.delete` | `LinkedList.t → int → bool` | `O(n)` | Elimina la primera aparición, devuelve `true` si tuvo éxito / Removes first occurrence, returns `true` if successful |
@@ -77,14 +77,14 @@ Test Successful in 0.001s. 4 tests run.
 | `LinkedList.length` | `LinkedList.t → int` | `O(1)` | Número de nodos / Number of nodes |
 | `Stack.create` | `unit → Stack.t` | `O(1)` | Crea una pila vacía / Creates an empty stack |
 | `Stack.push` | `Stack.t → int → unit` | `O(1)` | Apila un valor / Pushes a value |
-| `Stack.pop` | `Stack.t → int option` | `O(1)` | Desapila el tope, `None` si está vacía / Pops the top, `None` if empty |
-| `Stack.peek` | `Stack.t → int option` | `O(1)` | Observa el tope sin extraerlo, `None` si está vacía / Observes the top without removing, `None` if empty |
+| `Stack.pop` | `Stack.t → int` | `O(1)` | Desapila el tope, `-1` si está vacía / Pops the top, `-1` if empty |
+| `Stack.peek` | `Stack.t → int` | `O(1)` | Observa el tope sin extraerlo, `-1` si está vacía / Observes the top without removing, `-1` if empty |
 | `Stack.is_empty` | `Stack.t → bool` | `O(1)` | Verdadero si la pila está vacía / True if the stack is empty |
 | `Stack.length` | `Stack.t → int` | `O(1)` | Número de elementos / Number of elements |
 | `Queue.create` | `unit → Queue.t` | `O(1)` | Crea una cola vacía / Creates an empty queue |
 | `Queue.enqueue` | `Queue.t → int → unit` | `O(1)` | Añade al final / Adds at the rear |
-| `Queue.dequeue` | `Queue.t → int option` | `O(1)` | Extrae el frente, `None` si está vacía / Removes the front, `None` if empty |
-| `Queue.peek` | `Queue.t → int option` | `O(1)` | Observa el frente sin extraerlo, `None` si está vacía / Observes the front without removing, `None` if empty |
+| `Queue.dequeue` | `Queue.t → int` | `O(1)` | Extrae el frente, `-1` si está vacía / Removes the front, `-1` if empty |
+| `Queue.peek` | `Queue.t → int` | `O(1)` | Observa el frente sin extraerlo, `-1` si está vacía / Observes the front without removing, `-1` if empty |
 | `Queue.is_empty` | `Queue.t → bool` | `O(1)` | Verdadero si la cola está vacía / True if the queue is empty |
 | `Queue.length` | `Queue.t → int` | `O(1)` | Número de elementos / Number of elements |
 
@@ -93,7 +93,7 @@ Test Successful in 0.001s. 4 tests run.
 | Decisión / Decision | Alternativa considerada / Alternative | Razón / Reason |
 |---|---|---|
 | Registros mutables con campos `option` | Tipos algebraicos inmutables | Permite mutación local sin reconstruir la estructura, conservando `O(1)` para inserciones y eliminaciones / Allows local mutation without rebuilding the structure, preserving `O(1)` for insertions and deletions |
-| `option` para enlaces y lecturas fallibles | Centinela `-1` o excepciones | `option` es el mecanismo idiomático de OCaml para valores opcionales, sin ambigüedad con valores válidos / `option` is OCaml's idiomatic mechanism for optional values, without ambiguity with valid values |
+| `option` solo en los enlaces (`next`, `head`, `tail`, `top`, `front`, `rear`) | `option` también en las lecturas fallibles | El contrato del módulo reserva el centinela `-1` para las lecturas: así ninguna operación devuelve un tipo opcional y el fallo es comparable con los valores de prueba positivos / The module contract reserves the `-1` sentinel for reads: no operation returns an optional type and failure compares against the positive test values |
 | Contador explícito en cada estructura | Recorrer la estructura para calcular el tamaño | Mantiene `O(1)` para `length` e `is_empty` en lugar de `O(n)` / Keeps `O(1)` for `length` and `is_empty` instead of `O(n)` |
 | Interfaz `.mli` separada | Solo archivo `.ml` | Separa el contrato público de la implementación, siguiendo la convención de OCaml / Separates the public contract from the implementation, following OCaml's convention |
 
@@ -108,7 +108,7 @@ Test Successful in 0.001s. 4 tests run.
 | `size()` | `length` | `length` es el nombre idiomático de OCaml para contar elementos / `length` is OCaml's idiomatic name for counting elements |
 | `set_next(next)` | `set_next node link` | Función que recibe el nodo y el nuevo enlace, no método del nodo / Function that receives the node and the new link, not a node method |
 | `delete(value)` devuelve éxito/fallo | `delete list value` devuelve `bool` | `true` si eliminó un nodo, `false` si el valor no está / `true` if a node was removed, `false` if the value is absent |
-| `pop()`, `peek()`, `dequeue()` devuelven indicador de fallo | Devuelven `int option` | `Some value` en éxito, `None` en fallo, sin centinelas / `Some value` on success, `None` on failure, without sentinels |
+| `pop()`, `peek()`, `dequeue()` devuelven indicador de fallo | Devuelven `int` con `-1` | `-1` en fallo, sin excepciones ni tipos opcionales / `-1` on failure, with no exceptions and no optional types |
 | Estructura en `src/` | Estructura en `lib/`, `bin/`, `test/` | Layout estándar de Dune para proyectos con biblioteca, ejecutable y pruebas / Dune's standard layout for projects with library, executable and tests |
 
 ## 🚨 Indicadores de fallo / Failure indicators
@@ -116,12 +116,12 @@ Test Successful in 0.001s. 4 tests run.
 | Operación / Operation | Situación de fallo / Failure situation | Indicador / Indicator | Ejemplo / Example |
 |---|---|---|---|
 | `Node.next` | Enlace ausente | `None` | `Node.next node` devuelve `None` |
-| `LinkedList.head` | Lista vacía | `None` | `LinkedList.head empty_list` devuelve `None` |
+| `LinkedList.head` | Lista vacía | `-1` | `LinkedList.head empty_list` devuelve `-1` |
 | `LinkedList.delete` | Valor no encontrado | `false` | `LinkedList.delete list 99` devuelve `false` |
-| `Stack.pop` | Pila vacía | `None` | `Stack.pop empty_stack` devuelve `None` |
-| `Stack.peek` | Pila vacía | `None` | `Stack.peek empty_stack` devuelve `None` |
-| `Queue.dequeue` | Cola vacía | `None` | `Queue.dequeue empty_queue` devuelve `None` |
-| `Queue.peek` | Cola vacía | `None` | `Queue.peek empty_queue` devuelve `None` |
+| `Stack.pop` | Pila vacía | `-1` | `Stack.pop empty_stack` devuelve `-1` |
+| `Stack.peek` | Pila vacía | `-1` | `Stack.peek empty_stack` devuelve `-1` |
+| `Queue.dequeue` | Cola vacía | `-1` | `Queue.dequeue empty_queue` devuelve `-1` |
+| `Queue.peek` | Cola vacía | `-1` | `Queue.peek empty_queue` devuelve `-1` |
 
 ## ✅ Cobertura de pruebas / Test coverage
 
@@ -155,9 +155,9 @@ Ninguna / None
 
 ## 📝 Notas de implementación / Implementation Notes
 
-**ES:** OCaml usa registros mutables para los punteros de las estructuras (`head`, `tail`, `top`, `front`, `rear`) y el contador. Los enlaces entre nodos se representan con `option`, donde `None` indica ausencia. Esta es la forma idiomática de OCaml para manejar valores opcionales sin centinelas ni excepciones. La interfaz `.mli` declara el contrato público, separándolo de la implementación. Las pruebas usan Alcotest y cada caso crea su propia instancia para evitar interferencias.
+**ES:** OCaml usa registros mutables para los punteros de las estructuras (`head`, `tail`, `top`, `front`, `rear`) y el contador. Los **enlaces** entre nodos se representan con `option`, donde `None` indica ausencia; las **lecturas fallibles** (`head`, `pop`, `peek`, `dequeue`) devuelven `int` con `-1`, como el resto de lenguajes del módulo, de modo que ninguna operación del contrato devuelve un tipo opcional. La interfaz `.mli` declara el contrato público, separándolo de la implementación. Las pruebas usan Alcotest y cada caso crea su propia instancia para evitar interferencias.
 
-**EN:** OCaml uses mutable records for the structures' pointers (`head`, `tail`, `top`, `front`, `rear`) and the counter. Links between nodes are represented with `option`, where `None` indicates absence. This is OCaml's idiomatic way to handle optional values without sentinels or exceptions. The `.mli` interface declares the public contract, separating it from the implementation. Tests use Alcotest and each case creates its own instance to avoid interference.
+**EN:** OCaml uses mutable records for the structures' pointers (`head`, `tail`, `top`, `front`, `rear`) and the counter. **Links** between nodes are represented with `option`, where `None` indicates absence; **fallible reads** (`head`, `pop`, `peek`, `dequeue`) return `int` with `-1`, like the rest of the module's languages, so no contract operation returns an optional type. The `.mli` interface declares the public contract, separating it from the implementation. Tests use Alcotest and each case creates its own instance to avoid interference.
 
 **ES:** Este proyecto también está implementado en otros lenguajes. Explora el repositorio principal para consultar las demás versiones.
 
