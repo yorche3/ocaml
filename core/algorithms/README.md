@@ -12,6 +12,7 @@ Los módulos de esta fase trabajan sobre `int array`, que en OCaml **es mutable*
 |--------|---------------|---------|:-----:|:------:|
 | [`naive_sort/`](naive_sort/) | [05_Naive_Sort](https://yorche3.github.io/programming_languages/core/algorithms/05_Naive_Sort/) | `dune runtest` + Alcotest | 3 | ✅ |
 | [`data_structures_basics/`](data_structures_basics/) | [06_Data_Structures_Basics](https://yorche3.github.io/programming_languages/core/algorithms/06_Data_Structures_Basics/) | `dune runtest` + Alcotest | 4 | ✅ |
+| [`data_structures_advanced/`](data_structures_advanced/) | [07_Data_Structures_Advanced](https://yorche3.github.io/programming_languages/core/algorithms/07_Data_Structures_Advanced/) | `dune runtest` + Alcotest | 24 | ✅ |
 
 ---
 
@@ -28,18 +29,31 @@ algorithms/
 │   │   ├── dune                       # Test ejecutable con alcotest
 │   │   └── naive_sort_tests.ml        # 3 tests × 7 casos
 │   └── README.md
-└── data_structures_basics/            # 06_Data_Structures_Basics
-    ├── dune-project                   # (lang dune 3.24) + (name data_structures_basics)
+├── data_structures_basics/            # 06_Data_Structures_Basics
+│   ├── dune-project                   # (lang dune 3.24) + (name data_structures_basics)
+│   ├── lib/
+│   │   ├── dune                       # Librería data_structures_basics
+│   │   ├── data_structures_basics.ml  # Node, LinkedList, Stack, Queue
+│   │   └── data_structures_basics.mli # Interfaz del módulo
+│   ├── bin/
+│   │   ├── dune                       # Ejecutable
+│   │   └── main.ml                    # Punto de entrada
+│   ├── test/
+│   │   ├── dune                       # Test ejecutable con alcotest
+│   │   └── test_data_structures_basics.ml  # 4 tests
+│   └── README.md
+└── data_structures_advanced/          # 07_Data_Structures_Advanced
+    ├── dune-project                   # (lang dune 3.24) + (name data_structures_advanced)
     ├── lib/
-    │   ├── dune                       # Librería data_structures_basics
-    │   ├── data_structures_basics.ml  # Node, LinkedList, Stack, Queue
-    │   └── data_structures_basics.mli # Interfaz del módulo
+    │   ├── dune                       # Librería data_structures_advanced
+    │   ├── data_structures_advanced.ml  # TreeNode, BinaryTree, Graph
+    │   └── data_structures_advanced.mli # Interfaz del módulo
     ├── bin/
     │   ├── dune                       # Ejecutable
     │   └── main.ml                    # Punto de entrada
     ├── test/
     │   ├── dune                       # Test ejecutable con alcotest
-    │   └── test_data_structures_basics.ml  # 4 tests
+    │   └── test_data_structures_advanced.ml # 24 tests
     └── README.md
 ```
 
@@ -77,6 +91,10 @@ dune runtest
 
 # Data Structures Basics Tests
 cd data_structures_basics
+dune runtest
+
+# Data Structures Advanced Tests
+cd data_structures_advanced
 dune runtest
 ```
 
