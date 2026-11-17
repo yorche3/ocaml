@@ -1,3 +1,4 @@
 (test
  (name test_data_structures_advanced)
- (libraries data_structures_advanced))
+ (libraries data_structures_advanced alcotest))
+
